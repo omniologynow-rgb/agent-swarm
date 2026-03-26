@@ -1,0 +1,4 @@
+# Agent Swarm Dependencies
+# Intentionally minimal — no heavy frameworks
+httpx>=0.27.0
+python-dotenv>=1.0.0

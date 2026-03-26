@@ -1,0 +1,27 @@
+# Agent Swarm — Docker Compose
+# Can be added alongside ProfitSpot's existing docker-compose
+#
+# Usage:
+#   docker-compose up -d        # Start the swarm (background)
+#   docker-compose run swarm python main.py --task "write a component"
+#   docker-compose run swarm python demo.py
+
+version: '3.8'
+
+services:
+  swarm:
+    build: .
+    container_name: agent-swarm
+    env_file: .env
+    volumes:
+      - ./logs:/var/log/agent_swarm
+      - .:/app
+    stdin_open: true
+    tty: true
+    restart: "no"
+    # Low resource limits — this is intentionally lightweight
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.25'
